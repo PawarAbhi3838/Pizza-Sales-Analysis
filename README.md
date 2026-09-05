@@ -1,2 +1,646 @@
-# Pizza-Sales-Analysis
-Pizza Sales Analysis is an interactive data analytics project built using PostgreSQL and Microsoft Power BI.
+# 🍕 Pizza Sales Analysis | PostgreSQL + Power BI
+
+## 📌 Project Overview
+
+**Pizza Sales Analysis** is an interactive data analytics project built using **PostgreSQL and Microsoft Power BI**.
+The project analyzes pizza sales transactions to understand **revenue, orders, pizza quantity sold, customer ordering patterns, pizza categories, pizza sizes, and individual pizza performance**.
+The analysis starts with SQL queries in PostgreSQL and the results are presented through an interactive **Pizza Sales Performance Report** in Power BI.
+
+---
+
+## 🎯 Project Objectives
+
+The main objectives of this project are:
+
+- Calculate key pizza sales KPIs.
+- Analyze the monthly revenue trend.
+- Analyze orders by day of the week.
+- Calculate sales percentage by pizza category.
+- Calculate sales percentage by pizza size.
+- Analyze total pizzas sold by size.
+- Analyze total pizzas sold by category.
+- Identify the top-performing pizzas by revenue.
+- Identify the lowest-performing pizzas by revenue.
+- Identify the top and bottom pizzas by quantity sold.
+- Identify the top and bottom pizzas by total orders.
+- Create an interactive Power BI dashboard for business analysis.
+
+---
+
+# 🛠️ Tools & Technologies
+
+| ToolPurpose              |                                           |
+| ------------------------ | ----------------------------------------- |
+| 🐘 **PostgreSQL**        | Database, SQL queries and sales analysis  |
+| 📊 **Power BI**          | Interactive dashboard and visualization   |
+| 🧮 **SQL**               | KPI calculations, aggregation and ranking |
+| 🖼️ **Power BI Visuals** | Charts, KPI cards, slicers and tables     |
+| 🐙 **GitHub**            | Project documentation and portfolio       |
+
+---
+
+# 🗃️ Dataset / Table
+
+The SQL queries provided for this project use the following table:
+
+```
+PIZZA_SALES
+```
+
+The analysis uses these fields:
+
+```
+ORDER_ID
+ORDER_DATE
+PIZZA_NAME
+PIZZA_CATEGORY
+PIZZA_SIZE
+QUANTITY
+TOTAL_PRICE
+```
+
+---
+
+# 📊 Dashboard Overview
+
+The Power BI dashboard is titled:
+
+## 🍕 PIZZA SALES PERFORMANCE REPORT
+
+The dashboard contains KPI cards, filters, trend analysis, category and size analysis, pizza-level performance analysis, and interactive visuals.
+
+### 🔢 KPI Cards
+
+The dashboard displays:
+
+- **Total Revenue**
+- **Total Orders**
+- **Average Order Value**
+- **Total Pizza Sold**
+- **Average Pizza Per Order**
+
+The dashboard screenshot shows the following displayed KPI values:
+
+| KPIDashboard Value      |             |
+| ----------------------- | ----------- |
+| Total Revenue           | **817.62K** |
+| Total Orders            | **21,334**  |
+| Average Order Value     | **38.32**   |
+| Total Pizza Sold        | **49,559**  |
+| Average Pizza Per Order | **2.32**    |
+
+---
+
+# 🎛️ Interactive Filters
+
+The dashboard provides filters for:
+
+### Month
+
+```
+Jan
+Feb
+Mar
+Apr
+May
+Jun
+Jul
+Aug
+Sep
+Oct
+Nov
+Dec
+```
+
+### Pizza Category
+
+```
+Chicken
+Classic
+Supreme
+Veggie
+```
+
+### Pizza Size
+
+```
+Large
+Medium
+Small
+X-Large
+XX-Large
+```
+
+These filters allow the user to interactively analyze different parts of the pizza sales data.
+
+---
+
+# 📈 Dashboard Visualizations
+
+## 1. Monthly Revenue Trend
+
+The **Monthly Revenue Trend** visual shows how total revenue changes across the months.
+The dashboard displays monthly revenue values including:
+
+```
+Jan   69.8K
+Feb   65.2K
+Mar   70.4K
+Apr   68.7K
+May   71.2K
+Jun   68.2K
+Jul   72.6K
+Aug   68.3K
+Sep   64.2K
+Oct   64.0K
+Nov   70.4K
+Dec   64.7K
+```
+
+This visual helps identify higher and lower revenue months.
+
+---
+
+## 2. Sales Distribution by Pizza Category
+
+The dashboard uses a donut chart to show the percentage distribution of sales across:
+
+- Classic
+- Supreme
+- Chicken
+- Veggie
+
+The displayed percentages are:
+
+```
+Classic   26.91%
+Supreme   25.46%
+Chicken   23.95%
+Veggie    23.68%
+```
+
+---
+
+## 3. Sales Distribution by Pizza Size
+
+The dashboard analyzes sales distribution across pizza sizes.
+The displayed percentages include:
+
+```
+Large       45.89%
+Medium      30.49%
+Small       21.77%
+X-Large      1.72%
+XX-Large     0.13%
+```
+
+This visual helps understand which pizza sizes contribute most to sales.
+
+---
+
+## 4. Orders by Day of Week
+
+The dashboard compares total orders by day:
+
+```
+Friday      3,158
+Monday      2,972
+Saturday    2,624
+Sunday      2,798
+Thursday    3,353
+Tuesday     3,024
+Wednesday   3,238
+```
+
+This helps identify ordering patterns throughout the week.
+
+---
+
+## 5. Total Pizzas Sold by Size & Category
+
+A stacked visual compares pizza quantity sold across:
+
+```
+Large
+Medium
+Small
+X-Large
+XX-Large
+```
+
+and breaks the quantities down by pizza category:
+
+```
+Chicken
+Classic
+Supreme
+Veggie
+```
+
+This provides a combined view of **pizza size and category performance**.
+
+---
+
+## 6. Revenue by Pizza Name
+
+The dashboard contains a pizza-level revenue visual that helps compare the revenue generated by individual pizza names.
+The project SQL also calculates the **Top 5 and Bottom 5 pizzas by revenue**.
+
+---
+
+# 🐘 PostgreSQL SQL Analysis
+
+The following SQL analysis is used for the project.
+
+## 1️⃣ Total Revenue
+
+```
+SELECT
+    SUM(TOTAL_PRICE) AS TOTAL_REVENUE
+FROM PIZZA_SALES;
+```
+
+## 2️⃣ Total Orders
+
+```
+SELECT
+    COUNT(DISTINCT ORDER_ID) AS TOTAL_ORDERS
+FROM PIZZA_SALES;
+```
+
+## 3️⃣ Average Order Value
+
+```
+SELECT
+    CAST(
+        CAST(SUM(TOTAL_PRICE) AS DECIMAL(10, 2))
+        / CAST(COUNT(DISTINCT ORDER_ID) AS DECIMAL(10, 2))
+        AS DECIMAL(10, 2)
+    ) AS AVG_ORDER_VALUE
+FROM PIZZA_SALES;
+```
+
+## 4️⃣ Total Pizzas Sold
+
+```
+SELECT
+    SUM(QUANTITY) AS TOTAL_PIZZA_SOLD
+FROM PIZZA_SALES;
+```
+
+## 5️⃣ Average Pizzas Per Order
+
+```
+SELECT
+    SUM(QUANTITY) / COUNT(DISTINCT ORDER_ID) AS AVG_PIZZA_PER_ORDER
+FROM PIZZA_SALES;
+```
+
+---
+
+# 📅 Revenue & Order Trends
+
+## 6️⃣ Monthly Revenue Trend
+
+```
+SELECT
+    TO_CHAR(ORDER_DATE, 'MONTH') AS MONTH,
+    SUM(TOTAL_PRICE) AS TOTAL_REVENUE
+FROM PIZZA_SALES
+GROUP BY TO_CHAR(ORDER_DATE, 'MONTH');
+```
+
+## 7️⃣ Daily Trend for Total Orders
+
+```
+SELECT
+    TO_CHAR(ORDER_DATE, 'DAY') AS DAY,
+    COUNT(DISTINCT ORDER_ID) AS TOTAL_ORDER
+FROM PIZZA_SALES
+GROUP BY TO_CHAR(ORDER_DATE, 'DAY');
+```
+
+---
+
+# 🍕 Category & Size Analysis
+
+## 8️⃣ Percentage of Sales by Pizza Category
+
+```
+SELECT
+    PIZZA_CATEGORY,
+    SUM(TOTAL_PRICE) AS TOTAL_REVENUE,
+    CAST(
+        SUM(TOTAL_PRICE) * 100 /
+        (
+            SELECT SUM(TOTAL_PRICE)
+            FROM PIZZA_SALES
+        )
+        AS DECIMAL(10, 2)
+    ) AS PCT
+FROM PIZZA_SALES
+GROUP BY PIZZA_CATEGORY;
+```
+
+## 9️⃣ Percentage of Sales by Pizza Size
+
+```
+SELECT
+    PIZZA_SIZE,
+    SUM(TOTAL_PRICE) AS TOTAL_REVENUE,
+    CAST(
+        SUM(TOTAL_PRICE) * 100 /
+        (
+            SELECT SUM(TOTAL_PRICE)
+            FROM PIZZA_SALES
+        )
+        AS DECIMAL(10, 2)
+    ) AS PCT
+FROM PIZZA_SALES
+GROUP BY PIZZA_SIZE;
+```
+
+## 🔟 Total Pizza Sold by Size
+
+```
+SELECT
+    PIZZA_SIZE,
+    SUM(QUANTITY) AS TOTAL_PIZZA_SOLD
+FROM PIZZA_SALES
+GROUP BY PIZZA_SIZE;
+```
+
+## 1️⃣1️⃣ Total Pizza Sold by Category
+
+```
+SELECT
+    PIZZA_CATEGORY,
+    SUM(QUANTITY) AS TOTAL_PIZZA_SOLD
+FROM PIZZA_SALES
+GROUP BY PIZZA_CATEGORY;
+```
+
+---
+
+# 🏆 Top & Bottom Pizza Analysis
+
+## 1️⃣2️⃣ Top 5 Pizzas by Revenue
+
+```
+SELECT
+    PIZZA_NAME,
+    SUM(TOTAL_PRICE) AS TOTAL_REVENUE
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY TOTAL_REVENUE DESC
+LIMIT 5;
+```
+
+## 1️⃣3️⃣ Bottom 5 Pizzas by Revenue
+
+```
+SELECT
+    PIZZA_NAME,
+    SUM(TOTAL_PRICE) AS TOTAL_REVENUE
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY TOTAL_REVENUE ASC
+LIMIT 5;
+```
+
+## 1️⃣4️⃣ Top 5 Pizzas by Quantity
+
+```
+SELECT
+    PIZZA_NAME,
+    SUM(QUANTITY) AS TOTAL_PIZZA_SOLD
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY TOTAL_PIZZA_SOLD DESC
+LIMIT 5;
+```
+
+## 1️⃣5️⃣ Bottom 5 Pizzas by Quantity
+
+```
+SELECT
+    PIZZA_NAME,
+    SUM(QUANTITY) AS TOTAL_PIZZA_SOLD
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY TOTAL_PIZZA_SOLD ASC
+LIMIT 5;
+```
+
+## 1️⃣6️⃣ Top 5 Pizzas by Total Orders
+
+```
+SELECT
+    PIZZA_NAME,
+    COUNT(DISTINCT ORDER_ID) AS TOTAL_ORDERS
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY TOTAL_ORDERS DESC
+LIMIT 5;
+```
+
+## 1️⃣7️⃣ Bottom 5 Pizzas by Total Orders
+
+```
+SELECT
+    PIZZA_NAME,
+    COUNT(DISTINCT ORDER_ID) AS TOTAL_ORDERS
+FROM PIZZA_SALES
+GROUP BY PIZZA_NAME
+ORDER BY TOTAL_ORDERS ASC
+LIMIT 5;
+```
+
+---
+
+# 🔄 Project Workflow
+
+```
+                  🍕 Pizza Sales Data
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │  PostgreSQL   │
+                 │  Data Storage │
+                 └───────┬───────┘
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │  SQL Analysis │
+                 │   KPIs &      │
+                 │   Metrics     │
+                 └───────┬───────┘
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │    Power BI   │
+                 │ Data Modeling │
+                 │ & Visualization│
+                 └───────┬───────┘
+                         │
+                         ▼
+                 ┌───────────────┐
+                 │  Interactive   │
+                 │   Dashboard    │
+                 └───────────────┘
+```
+
+---
+
+# 💡 Key Insights Presented
+
+The dashboard is designed to answer questions such as:
+
+- How much total revenue was generated?
+- How many orders were placed?
+- How many pizzas were sold?
+- What is the average order value?
+- How many pizzas are purchased per order on average?
+- Which months generate higher or lower revenue?
+- Which days have higher order volumes?
+- Which pizza category contributes the most to sales?
+- Which pizza size contributes the most to sales?
+- Which pizzas are the top performers by revenue?
+- Which pizzas have the lowest revenue?
+- Which pizzas are sold in the highest quantities?
+- Which pizzas receive the highest number of orders?
+
+---
+
+# 📁 Recommended Repository Structure
+
+```
+Pizza-Sales-Analysis/
+│
+├── README.md
+│
+├── SQL/
+│   └── pizza_sales_analysis.sql
+│
+├── Dashboard/
+│   └── Pizza_Sales_Performance_Report.pbix
+│
+├── Dataset/
+│   └── pizza_sales.csv
+│
+└── assets/
+    └── Pizza_Dashboard.png
+```
+
+---
+
+# 🚀 How to Reproduce the Project
+
+### Step 1 — Prepare the data
+
+Prepare the pizza sales dataset with the fields used by the `PIZZA_SALES` table.
+
+### Step 2 — Load data into PostgreSQL
+
+Create the `PIZZA_SALES` table and import the dataset.
+
+### Step 3 — Run SQL queries
+
+Execute the queries in:
+
+```
+SQL/pizza_sales_analysis.sql
+```
+
+These queries calculate the project's KPIs and analytical metrics.
+
+### Step 4 — Connect PostgreSQL to Power BI
+
+In Power BI:
+
+```
+Get Data
+    ↓
+PostgreSQL Database
+    ↓
+Select PIZZA_SALES
+    ↓
+Transform / Load
+```
+
+### Step 5 — Create the dashboard
+
+Build the KPI cards, slicers, monthly trend, category distribution, size distribution, daily order analysis, size/category quantity analysis, and pizza-level revenue visuals.
+
+---
+
+# 🧠 Skills Demonstrated
+
+### SQL / PostgreSQL
+
+- `SELECT`
+- `SUM()`
+- `COUNT()`
+- `COUNT(DISTINCT)`
+- `GROUP BY`
+- `ORDER BY`
+- `LIMIT`
+- Subqueries
+- Percentage calculations
+- Aggregation
+- Top N / Bottom N analysis
+- Date formatting using `TO_CHAR()`
+
+### Power BI
+
+- Dashboard design
+- KPI cards
+- Interactive slicers
+- Donut charts
+- Line charts
+- Bar/stacked visuals
+- Data filtering
+- Business reporting
+- Data visualization
+
+---
+
+# 📌 Project Outcome
+
+This project demonstrates a complete analytics workflow:
+**Raw Sales Data → PostgreSQL → SQL Analysis → KPIs → Power BI → Interactive Dashboard**
+The project helped build practical experience in combining **SQL-based data analysis with Power BI visualization** to create a business-focused sales performance report.
+
+---
+
+# 👨‍💻 About Me
+
+**Abhishek Pawar**
+🎓 Information Technology Engineering Student
+📊 Aspiring Data Analyst
+💻 Interested in **SQL, PostgreSQL, Power BI, Python and Data Analytics**
+I am continuously building practical projects to improve my data analysis, visualization, SQL and business intelligence skills.
+
+---
+
+# ⭐ Project Highlights
+
+```
+🍕 Pizza Sales Analysis
+🐘 PostgreSQL
+📊 Power BI
+🧮 SQL
+📈 Data Visualization
+🎛️ Interactive Dashboard
+🏆 Top & Bottom Product Analysis
+📅 Time-Based Sales Analysis
+```
+
+---
+
+## 📜 License
+
+This project is created for **learning, portfolio and data analytics practice purposes**.
+
+
+
